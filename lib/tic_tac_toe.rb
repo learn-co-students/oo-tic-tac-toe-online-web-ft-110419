@@ -1,3 +1,5 @@
+require 'pry'
+
 class TicTacToe 
   WIN_COMBINATIONS = [
     [0,1,2],
@@ -88,6 +90,7 @@ class TicTacToe
   end
   
   def play 
+    binding.pry
     game_over = false 
     until game_over == true do
       turn
