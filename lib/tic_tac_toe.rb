@@ -1,5 +1,3 @@
-require 'pry'
-
 class TicTacToe 
   WIN_COMBINATIONS = [
     [0,1,2],
@@ -11,6 +9,7 @@ class TicTacToe
     [0,4,8],
     [2,4,6]
     ]
+    
   def initialize(board=nil)
     @board = board || Array.new(9, " ")
   end
@@ -24,8 +23,7 @@ class TicTacToe
   end
  
   def display_board
-    puts " #{@board[0]
-    } | #{@board[1]} | #{@board[2]} "
+    puts " #{@board[0]} | #{@board[1]} | #{@board[2]} "
     puts "-----------"
     puts " #{@board[3]} | #{@board[4]} | #{@board[5]} "
     puts "-----------"
@@ -84,17 +82,14 @@ class TicTacToe
     return true if won? or draw?
   end 
   
-  def winner 
+  def winner()
     return nil if !won?
     @board[won?[0]]
   end
   
   def play 
-    binding.pry
-    game_over = false 
-    until game_over == true do
+    while !over?
       turn
-      game_over = over?
     end
     if won? 
       puts "Winner"
