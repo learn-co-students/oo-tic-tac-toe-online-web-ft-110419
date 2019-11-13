@@ -55,9 +55,9 @@ class TicTacToe
     bf = @board.flatten
     result = nil
     WIN_COMBINATIONS.each do |row|
-      combo = "#{bf[row[0]]} #{bf[row[1]]} #{bf[row[2]]}".split(" ")
-      plyr_x = combo.count{|plyr| plyr == "X"}
-      binding.pry
+      board_values = "#{bf[row[0]]} #{bf[row[1]]} #{bf[row[2]]}".split(" ")
+      plyr_x = board_values.count{|plyr| plyr == "X"}
+      
     	if plyr_x == 3 || plyr_x == 0 
     		result = "#{row[0]} #{row[1]} #{row[2]}".split.map{|n| n.to_i}
     	end
