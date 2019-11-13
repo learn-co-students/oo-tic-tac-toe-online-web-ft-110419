@@ -52,14 +52,14 @@ class TicTacToe
   end
   
   def won?
-    b_f = @board.flatten
     result = nil
     WIN_COMBINATIONS.each do |row|
-      board_values = "#{b_f[row[0]]} #{b_f[row[1]]} #{b_f[row[2]]}".split(" ")
-      plyr_x = board_values.count{|plyr| plyr == "X"}
-      
-    	if plyr_x == 3 || plyr_x == 0 && board_values == 3
+      combo = "#{@board[row[0]]} #{@board[row[1]]} #{@board[row[2]]}".split(" ")
+      plyr_x = combo.count{|plyr| plyr == "X"}
+
+    	if plyr_x == 3 || plyr_x == 0 && combo.size == 3
     		result = "#{row[0]} #{row[1]} #{row[2]}".split.map{|n| n.to_i}
+    		break result
     	end
     	
     end
@@ -80,8 +80,18 @@ class TicTacToe
   end
   
   def winner
-    @board[won?.first] if won?
-    binding.pry
+    won? ? @board[won?.first] : won?
+  end
+  
+  def play
+    until over?
+      turn
+    end
+    if winner
+      puts "Congratulations #{winner}"
+    elsif draw?
+      puts "Game Ended In A Draw"
+    end
   end
   
 end
