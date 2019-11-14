@@ -74,9 +74,8 @@ class TicTacToe
       
       if !validate
         puts "Invalid selection. Please try again!" 
-      self.display_board
       end
-      
+      self.display_board
     end
     @board[updated_input] = current_player 
   end
@@ -111,7 +110,7 @@ class TicTacToe
 
    puts "Congratulations #{winner}!" if won?
    puts "Cat's Game!" if draw?
-
+   self.display_board
   end
 
 end
