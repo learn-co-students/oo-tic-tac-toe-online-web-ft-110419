@@ -56,7 +56,7 @@ WIN_COMBINATIONS = [[0,1,2],[3,4,5],[6,7,8],
         !won? && full? ? true : false
       end
       def over?
-        won? || draw? ? true : false
+        draw? || won? ? true : false
         end
         def winner
             WIN_COMBINATIONS.find do |combo|
