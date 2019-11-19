@@ -1,3 +1,4 @@
+require "pry"
 class TicTacToe
 WIN_COMBINATIONS = [[0,1,2],[3,4,5],[6,7,8],
                     [0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
@@ -24,26 +25,63 @@ WIN_COMBINATIONS = [[0,1,2],[3,4,5],[6,7,8],
         end
       end
       def valid_move?(i)
-        if @board[i]==" "
+        if !position_taken?(i) && i.between?(0,8)
           true
         else false
         end
       end
-      def turn()
+      def turn
         puts "Please enter 1-9:"
-        i = gets
-        value = i.to_i
-
-        if valid_move?(value) == true
-          move(input_to_index(value),current_player)
-
-        elsif valid_move?(value)==false
-          puts "Please enter 1-9:"
-          i = gets
+        i = gets.strip
+        value = input_to_index(i)
+        if valid_move?(value)
+          move(value,current_player)
         else
+          turn
         end
-        puts display_board
+        display_board
       end
+
+      def won?
+
+          win = WIN_COMBINATIONS.find do |combo|
+            @board[combo[0]]==@board[combo[1]]&&@board[combo[2]]== @board[combo[0]]&& !@board[combo[0]].empty?
+          end
+
+      end
+      def full?
+        @board.all? {|x| x=="X"||x=="O"}
+      end
+      def draw?
+        !won? && full? ? true : false
+      end
+      def over?
+        won? || full? ? true : false
+        end
+        def winner
+            WIN_COMBINATIONS.find do |combo|
+              if @board[combo[0]]=="X"&&
+                @board[combo[1]]=="X"&&
+                @board[combo[2]]=="X"
+                return "X"
+              elsif @board[combo[0]]=="O"&&
+                @board[combo[1]]=="O"&&
+                @board[combo[2]]=="O"
+                return "O"
+              else nil
+              end
+            end
+        end
+        def play
+          until over?
+            turn
+          end
+          if won?
+            puts "Congratulations #{winner}!"
+          else draw?
+            puts "Cat's Game!"
+          end
+        end
       def display_board
         puts " #{@board[0]} | #{@board[1]} | #{@board[2]} "
         puts "-----------"
