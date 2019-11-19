@@ -45,7 +45,8 @@ WIN_COMBINATIONS = [[0,1,2],[3,4,5],[6,7,8],
       def won?
 
           win = WIN_COMBINATIONS.find do |combo|
-            @board[combo[0]]==@board[combo[1]]&&@board[combo[2]]== @board[combo[0]]&& !@board[combo[0]].empty?
+            @board[combo[0]]==@board[combo[1]]&&@board[combo[1]]==@board[combo[2]]&& position_taken?(combo[0])
+
           end
 
       end
@@ -53,10 +54,10 @@ WIN_COMBINATIONS = [[0,1,2],[3,4,5],[6,7,8],
         @board.all? {|x| x=="X"||x=="O"}
       end
       def draw?
-        !won? && full? ? true : false
+        !won? && full?
       end
       def over?
-        draw? || won? ? true : false
+        draw? || won?
         end
         def winner
             WIN_COMBINATIONS.find do |combo|
@@ -78,7 +79,7 @@ WIN_COMBINATIONS = [[0,1,2],[3,4,5],[6,7,8],
           end
           if won?
             puts "Congratulations #{winner}!"
-          else draw?
+          else
             puts "Cat's Game!"
           end
         end
