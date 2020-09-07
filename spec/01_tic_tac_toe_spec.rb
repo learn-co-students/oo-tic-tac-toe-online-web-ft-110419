@@ -1,4 +1,5 @@
 require_relative '../lib/tic_tac_toe.rb'
+require 'pry'
 
 describe './lib/tic_tac_toe.rb' do
   describe TicTacToe do
@@ -87,7 +88,7 @@ describe './lib/tic_tac_toe.rb' do
         game = TicTacToe.new
         board = ["X", " ", " ", " ", " ", " ", " ", " ", "O"]
         game.instance_variable_set(:@board, board)
-
+      #  binding.pry
         index = 0
         expect(game.position_taken?(index)).to be(true)
 
